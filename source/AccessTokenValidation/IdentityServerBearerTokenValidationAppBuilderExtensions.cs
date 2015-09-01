@@ -86,7 +86,7 @@ namespace Owin
                 AuthenticationMode = options.AuthenticationMode,
                 AuthenticationType = options.AuthenticationType,
                 AccessTokenProvider = new ValidationEndpointTokenProvider(options, loggerFactory),
-                Provider = new ContextTokenProvider(),
+                Provider = options.TokenProvider ?? new ContextTokenProvider(),
             };
 
             return bearerOptions;
@@ -116,7 +116,7 @@ namespace Owin
                 AccessTokenFormat = tokenFormat,
                 AuthenticationMode = options.AuthenticationMode,
                 AuthenticationType = options.AuthenticationType,
-                Provider = new ContextTokenProvider()
+                Provider = options.TokenProvider ?? new ContextTokenProvider(),
             };
 
             return bearerOptions;
