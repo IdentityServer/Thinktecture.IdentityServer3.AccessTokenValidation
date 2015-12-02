@@ -41,6 +41,7 @@ namespace IdentityServer3.AccessTokenValidation
             RequiredScopes = Enumerable.Empty<string>();
             ValidationResultCacheDuration = TimeSpan.FromMinutes(5);
             PreserveAccessToken = false;
+            SyncMetadataImmediately = true;
         }
 
         /// <summary>
@@ -178,5 +179,11 @@ namespace IdentityServer3.AccessTokenValidation
         /// The introspection HTTP handler.
         /// </value>
         public WebRequestHandler IntrospectionHttpHandler { get; set; }
+
+        /// <summary>
+        /// Indicates whether the discovery metadata to be synced immediately during the construction of 
+        /// the pipeline. <c>true</c> by default.
+        /// </summary>
+        public bool SyncMetadataImmediately { get; set; }
     }
 }
