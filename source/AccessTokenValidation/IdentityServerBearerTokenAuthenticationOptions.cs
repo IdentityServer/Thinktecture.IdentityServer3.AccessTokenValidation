@@ -22,6 +22,7 @@ using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.Owin.Security.Infrastructure;
 
 namespace IdentityServer3.AccessTokenValidation
 {
@@ -84,6 +85,11 @@ namespace IdentityServer3.AccessTokenValidation
         /// The backchannel HTTP handler.
         /// </value>
 		public HttpMessageHandler BackchannelHttpHandler { get; set; }
+
+        /// <summary>
+        /// Gets or sets mutator for the backchannel HTTP client.
+        /// </summary>
+        public Func<HttpClient, AuthenticationTokenReceiveContext, HttpClient> BackchannelHttpClientMutator { get; set; }
 
         /// <summary>
         /// Gets or sets the backchannel certificate validator.

@@ -30,7 +30,7 @@ namespace IdentityServer3.AccessTokenValidation
 {
     internal class ValidationEndpointTokenProvider : AuthenticationTokenProvider
     {
-        private readonly HttpClient _client;
+        private readonly HttpMessageHandler _requestHandler;
         private readonly string _tokenValidationEndpoint;
         private readonly IdentityServerBearerTokenAuthenticationOptions _options;
         private readonly ILogger _logger;
@@ -62,7 +62,7 @@ namespace IdentityServer3.AccessTokenValidation
                 webRequestHandler.ServerCertificateValidationCallback = options.BackchannelCertificateValidator.Validate;
             }
 
-            _client = new HttpClient(handler);
+            _requestHandler = handler;
             _options = options;
         }
 
@@ -87,10 +87,20 @@ namespace IdentityServer3.AccessTokenValidation
                 { "token", context.Token }
             };
 
+            HttpClient client;
+            if (_options.BackchannelHttpClientMutator == null)
+            {
+                client = new HttpClient(_requestHandler);
+            }
+            else
+            {
+                client = _options.BackchannelHttpClientMutator(new HttpClient(_requestHandler), context);
+            }
+
             HttpResponseMessage response = null;
             try
             {
-                response = await _client.PostAsync(_tokenValidationEndpoint, new FormUrlEncodedContent(form));
+                response = await client.PostAsync(_tokenValidationEndpoint, new FormUrlEncodedContent(form));
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
                     _logger.WriteInformation("Error returned from token validation endpoint: " + response.ReasonPhrase);
