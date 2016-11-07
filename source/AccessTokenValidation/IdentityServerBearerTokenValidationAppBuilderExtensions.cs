@@ -142,7 +142,7 @@ namespace Owin
 
                 // use static configuration
                 if (!string.IsNullOrWhiteSpace(options.IssuerName) &&
-                    options.SigningCertificate != null)
+                    options.SigningCertificates.Any())
                 {
                     var audience = options.IssuerName.EnsureTrailingSlash();
                     audience += "resources";
@@ -151,8 +151,7 @@ namespace Owin
                     {
                         ValidIssuer = options.IssuerName,
                         ValidAudience = audience,
-                        IssuerSigningToken = new X509SecurityToken(options.SigningCertificate),
-
+                        IssuerSigningTokens = options.SigningCertificates.Select(c => new X509SecurityToken(c)),
                         NameClaimType = options.NameClaimType,
                         RoleClaimType = options.RoleClaimType,
                     };
