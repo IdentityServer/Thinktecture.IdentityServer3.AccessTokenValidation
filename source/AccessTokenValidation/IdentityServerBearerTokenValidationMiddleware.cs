@@ -50,7 +50,7 @@ namespace IdentityServer3.AccessTokenValidation
         {
             _next = next;
             _options = options;
-            _logger = loggerFactory.Create(this.GetType().FullName);
+            _logger = loggerFactory?.Create(this.GetType().FullName) ?? new TraceLogger();
 
             if (options.LocalValidationOptions != null)
             {
