@@ -43,6 +43,7 @@ namespace IdentityServer3.AccessTokenValidation
             ValidationResultCacheDuration = TimeSpan.FromMinutes(5);
             PreserveAccessToken = false;
             DelayLoadMetadata = false;
+            SigningCertificates = new List<X509Certificate2>();
         }
 
         /// <summary>
@@ -62,12 +63,23 @@ namespace IdentityServer3.AccessTokenValidation
         public string IssuerName { get; set; }
 
         /// <summary>
-        /// Gets or sets the signing certificate (if you don't want to use the discovery document).
+        /// Sets the signing certificate (if you don't want to use the discovery document).
         /// </summary>
         /// <value>
         /// The signing certificate.
         /// </value>
-        public X509Certificate2 SigningCertificate { get; set; }
+        public void SigningCertificate(X509Certificate2 cert)
+        {
+            SigningCertificates.Add(cert);
+        }
+
+        /// <summary>
+        /// Gets or sets a list of acceptable signing certificates (if you don't want to use the discovery document).
+        /// </summary>
+        /// <value>
+        /// The signing certificate.
+        /// </value>
+        public IList<X509Certificate2> SigningCertificates { get; set; }
 
         /// <summary>
         /// Gets or sets the validation mode.

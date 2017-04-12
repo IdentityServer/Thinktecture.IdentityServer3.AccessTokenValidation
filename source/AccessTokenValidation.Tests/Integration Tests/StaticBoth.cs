@@ -2,6 +2,7 @@
 using FluentAssertions;
 using IdentityServer3.AccessTokenValidation;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
@@ -15,7 +16,7 @@ namespace AccessTokenValidation.Tests.Integration_Tests
         IdentityServerBearerTokenAuthenticationOptions _options = new IdentityServerBearerTokenAuthenticationOptions
         {
             IssuerName = TokenFactory.DefaultIssuer,
-            SigningCertificate = new X509Certificate2(Convert.FromBase64String(TokenFactory.DefaultPublicKey)),
+            SigningCertificates = new List<X509Certificate2> { new X509Certificate2(Convert.FromBase64String(TokenFactory.DefaultPublicKey))},
             Authority = "https://notused",
 
             ValidationMode = ValidationMode.Both

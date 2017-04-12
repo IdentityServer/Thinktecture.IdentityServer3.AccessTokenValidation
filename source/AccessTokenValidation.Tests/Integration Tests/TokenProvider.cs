@@ -19,7 +19,7 @@ namespace AccessTokenValidation.Tests.Integration_Tests
         IdentityServerBearerTokenAuthenticationOptions _options = new IdentityServerBearerTokenAuthenticationOptions
         {
             IssuerName = TokenFactory.DefaultIssuer,
-            SigningCertificate = new X509Certificate2(Convert.FromBase64String(TokenFactory.DefaultPublicKey)),
+            SigningCertificates = new List<X509Certificate2> { new X509Certificate2(Convert.FromBase64String(TokenFactory.DefaultPublicKey)) },
 
             ValidationMode = ValidationMode.Local
         };
