@@ -123,6 +123,8 @@
     <Compile Include="Integration Tests\StaticLocal.cs" />
     <Compile Include="Integration Tests\TokenProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestIdentityServerBearerTokenValidationMiddleware.cs" />
+    <Compile Include="TestTraceLogger.cs" />
     <Compile Include="Util\DiscoveryEndpointHandler.cs" />
     <Compile Include="Util\FailureDiscoveryEndpointHandler.cs" />
     <Compile Include="Util\IntrospectionEndpointHandler.cs" />

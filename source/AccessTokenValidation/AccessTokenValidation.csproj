@@ -111,6 +111,7 @@
     <Compile Include="Plumbing\ScopeRequirementMiddleware.cs" />
     <Compile Include="Plumbing\ValidationMode.cs" />
     <Compile Include="Plumbing\ScopeRequirementOptions.cs" />
+    <Compile Include="TraceLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\default.licenseheader">
